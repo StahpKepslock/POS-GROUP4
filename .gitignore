@@ -1,0 +1,45 @@
+# Build output
+bin/
+obj/
+target/
+out/
+
+# IDE files
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Compiled files
+*.class
+*.jar
+*.war
+*.ear
+*.dll
+*.exe
+*.pdb
+
+# Package files
+packages/
+*.nupkg
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Visual Studio files
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
