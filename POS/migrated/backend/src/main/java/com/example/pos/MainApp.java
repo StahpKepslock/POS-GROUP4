@@ -1,5 +1,7 @@
 package com.example.pos;
 
+import java.util.Objects;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,11 +9,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-        primaryStage.setTitle("POS System");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/ManageProducts.fxml")));
+        
+        primaryStage.setTitle("Manage Products");
         primaryStage.setScene(new Scene(root));
+        
+        // Maximize the window
+        primaryStage.setMaximized(true);
+        
         primaryStage.show();
     }
 

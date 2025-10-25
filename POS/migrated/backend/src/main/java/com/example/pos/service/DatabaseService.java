@@ -104,6 +104,33 @@ public class DatabaseService {
         return products;
     }
 
+    public void updateProduct(Product product) {
+        String sql = "UPDATE products SET name = ?, price = ?, stock = ? WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, product.getName());
+            stmt.setDouble(2, product.getPrice());
+            stmt.setInt(3, product.getStock());
+            stmt.setInt(4, product.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Failed to update product", e);
+            throw new RuntimeException("Failed to update product", e);
+        }
+    }
+
+    public void deleteProduct(int id) {
+        String sql = "DELETE FROM products WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Failed to delete product", e);
+            throw new RuntimeException("Failed to delete product", e);
+        }
+    }
+
     public void saveSale(Sale sale) {
         String salesql = "INSERT INTO sales (date, total) VALUES (?, ?)";
         String itemsql = "INSERT INTO sale_items (sale_id, product_id, quantity) VALUES (?, ?, ?)";
@@ -124,8 +151,9 @@ public class DatabaseService {
                                 itemsStmt.setInt(1, saleId);
                                 itemsStmt.setInt(2, item.getProduct().getId());
                                 itemsStmt.setInt(3, item.getQuantity());
-                                itemsStmt.executeUpdate();
+                                itemsStmt.addBatch();
                             }
+                            itemsStmt.executeBatch();
                         }
                     }
                 }
