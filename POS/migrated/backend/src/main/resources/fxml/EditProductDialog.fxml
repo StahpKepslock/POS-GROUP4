@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ButtonType?>
 
-<GridPane xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.pos.controllers.EditProductDialogController"
-          hgap="10" vgap="10">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
-
-    <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-
-    <Label text="Price:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-    <Label text="Stock:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField fx:id="stockField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-
-    <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <Button text="OK" onAction="#handleOk"/>
-        <Button text="Cancel" onAction="#handleCancel"/>
-    </HBox>
-</GridPane>
+<DialogPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pos.controllers.AddProductDialogController">
+    <headerText>
+        Add New Product
+    </headerText>
+    <content>
+        <GridPane hgap="10" vgap="10" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="RIGHT"/>
+            <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="Price:" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="RIGHT"/>
+            <TextField fx:id="priceField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Stock:" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.halignment="RIGHT"/>
+            <TextField fx:id="stockField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        </GridPane>
+    </content>
+    <buttonTypes>
+        <ButtonType fx:constant="OK" />
+        <ButtonType fx:constant="CANCEL" />
+    </buttonTypes>
+</DialogPane>

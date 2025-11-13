@@ -12,9 +12,9 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/ManageProducts.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Main.fxml")));
         
-        primaryStage.setTitle("Manage Products");
+        primaryStage.setTitle("Point of Sale");
         primaryStage.setScene(new Scene(root));
         
         // Maximize the window

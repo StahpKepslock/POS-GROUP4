@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.pos.controllers.NewSaleController"
+            prefHeight="600.0" prefWidth="800.0">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <center>
+        <VBox spacing="10">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Search products..." HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <TableView fx:id="productTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="200"/>
+                    <TableColumn fx:id="priceColumn" text="Price" prefWidth="100"/>
+                    <TableColumn fx:id="stockColumn" text="Stock" prefWidth="100"/>
+                </columns>
+            </TableView>
+            <Button text="Add to Sale" onAction="#handleAddProductToSale" maxWidth="Infinity"/>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox spacing="10" prefWidth="250">
+            <padding>
+                <Insets left="10"/>
+            </padding>
+            <Label text="Current Sale"/>
+            <TableView fx:id="saleItemsTable">
+                <columns>
+                    <TableColumn fx:id="saleItemNameColumn" text="Product" prefWidth="150"/>
+                    <TableColumn fx:id="saleItemQuantityColumn" text="Qty" prefWidth="50"/>
+                </columns>
+            </TableView>
+            <Button text="Remove from Sale" onAction="#handleRemoveProductFromSale" maxWidth="Infinity"/>
+            <HBox spacing="10">
+                <Label text="Total:"/>
+                <Label fx:id="totalLabel" text="0.00"/>
+            </HBox>
+            <Button text="Finalize Sale" onAction="#handleFinalizeSale" maxWidth="Infinity"/>
+        </VBox>
+    </right>
+</BorderPane>

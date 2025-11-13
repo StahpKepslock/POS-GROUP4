@@ -16,6 +16,9 @@
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
+    <HBox alignment="CENTER" spacing="10">
+        <Button text="Back to Main" onAction="#handleBackToMain"/>
+    </HBox>
     <HBox spacing="10" alignment="CENTER">
         <Button text="New Sale" onAction="#handleNewSale"/>
         <Button text="View Sales" onAction="#handleViewSales"/>

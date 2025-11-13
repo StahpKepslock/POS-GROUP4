@@ -6,33 +6,45 @@ import java.util.List;
 
 public class Sale {
     private int id;
-    private LocalDateTime date;
+    private LocalDateTime saleDate;
     private List<SaleItem> items;
     private double total;
 
-    public Sale(int id) {
+    /**
+     * Constructor for creating a Sale object from database data.
+     */
+    public Sale(int id, LocalDateTime saleDate, double total) {
         this.id = id;
-        this.date = LocalDateTime.now();
+        this.saleDate = saleDate;
+        this.total = total;
         this.items = new ArrayList<>();
-        this.total = 0.0;
     }
 
-    public void addItem(Product product, int quantity) {
-        SaleItem item = new SaleItem(product, quantity);
-        items.add(item);
-        recalculateTotal();
+    /**
+     * Constructor for creating a new sale before saving it to the database.
+     */
+    public Sale(LocalDateTime saleDate, ArrayList<SaleItem> items) {
+        this.saleDate = saleDate;
+        this.items = items;
+        this.total = calculateTotal();
     }
 
-    private void recalculateTotal() {
-        total = items.stream()
+    private double calculateTotal() {
+        return items.stream()
                     .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
                     .sum();
     }
 
-    // Getters and setters
+    // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
-    public LocalDateTime getDate() { return date; }
+
+    public LocalDateTime getSaleDate() { return saleDate; }
+    public void setSaleDate(LocalDateTime saleDate) { this.saleDate = saleDate; }
+
     public List<SaleItem> getItems() { return items; }
+    public void setItems(List<SaleItem> items) { this.items = items; }
+
     public double getTotal() { return total; }
+    public void setTotal(double total) { this.total = total; }
 }
