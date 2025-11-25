@@ -1,0 +1,9 @@
+:root{ --bg:#fff; --fg:#111; --muted:#666 }
+:root.dark{ --bg:#111; --fg:#eee; --muted:#aaa }
+html,body{ height:100%; margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--fg) }
+header{ display:flex; align-items:center; justify-content:space-between; padding:8px 16px; border-bottom:1px solid var(--muted) }
+.nav button{ margin-right:8px }
+main{ padding:16px }
+table{ width:100%; border-collapse:collapse }
+th,td{ padding:8px; border:1px solid #ddd }
+.productItem{ display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee }
