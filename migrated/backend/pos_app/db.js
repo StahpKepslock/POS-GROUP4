@@ -61,7 +61,44 @@ function removeProduct(id, cb) {
 }
 
 function allSales(cb) {
-  db.all('SELECT * FROM sales ORDER BY id', cb)
+  const sql = `
+    SELECT
+      s.id,
+      s.created_at,
+      s.total,
+      si.product_id,
+      p.name as product_name,
+      si.qty,
+      si.price_at_sale
+    FROM sales s
+    LEFT JOIN sale_items si ON s.id = si.sale_id
+    LEFT JOIN products p ON si.product_id = p.id
+    ORDER BY s.id DESC
+  `;
+  db.all(sql, (err, rows) => {
+    if (err) return cb(err);
+
+    const sales = {};
+    rows.forEach(row => {
+      if (!sales[row.id]) {
+        sales[row.id] = {
+          id: row.id,
+          created_at: row.created_at,
+          total: row.total,
+          items: []
+        };
+      }
+      if (row.product_id) {
+        sales[row.id].items.push({
+          product_id: row.product_id,
+          product_name: row.product_name,
+          qty: row.qty,
+          price_at_sale: row.price_at_sale
+        });
+      }
+    });
+    cb(null, Object.values(sales));
+  });
 }
 
 function createSale(cartItems, cb) {

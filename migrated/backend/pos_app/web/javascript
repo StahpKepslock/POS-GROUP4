@@ -1,0 +1,11 @@
+if (target.classList.contains('edit')) {
+    console.log('Edit button clicked', id); // You saw this message
+    const product = productsCache.find(p => p.id == id); // The problem is likely here
+    if (product) {
+        // Or the code in here is failing
+        productIdField.value = product.id;
+        productNameField.value = product.name;
+        productPriceField.value = product.price;
+        productAmountField.value = product.amount;
+    }
+}

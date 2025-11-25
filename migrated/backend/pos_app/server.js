@@ -8,7 +8,10 @@ app.use(cors())
 app.use(express.json())
 
 const WEB_DIR = path.join(__dirname, 'web')
+const ROOT_DIR = path.join(__dirname, '..', '..', '..', '..', 'POSmain')
 app.use(express.static(WEB_DIR))
+app.use('/sfx', express.static(ROOT_DIR))
+
 
 app.get('/api/products', (req, res) => {
   db.allProducts((err, rows) => {
