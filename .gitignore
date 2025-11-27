@@ -43,3 +43,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# Node.js
+node_modules/
+npm-debug.log
+dist/
+nodejs/

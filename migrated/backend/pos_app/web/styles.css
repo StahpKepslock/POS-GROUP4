@@ -7,10 +7,11 @@ header{ display:flex; align-items:center; justify-content:space-between; padding
     padding: 20px 60px; /* Adjust padding to change size */
     font-size: 2rem;    /* Adjust font size */
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold; /* Add this line */
 }
 main{ padding:16px }
 table{ width:100%; border-collapse:collapse }
-th,td{ padding:8px; border:1px solid #ddd }
+th,td{ padding:8px; border:1px solid #ddd; font-weight: bold; }
 .productItem{ display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee }
 
 /* At the end of the file */
