@@ -1,8 +1,13 @@
 :root{ --bg:#fff; --fg:#111; --muted:#666 }
 :root.dark{ --bg:#111; --fg:#eee; --muted:#aaa }
-html,body{ height:100%; margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--fg) }
+html,body{ height:100%; margin:0; font-family:Verdana, sans-serif; background:var(--bg); color:var(--fg) }
 header{ display:flex; align-items:center; justify-content:space-between; padding:8px 16px; border-bottom:1px solid var(--muted) }
-.nav button{ margin-right:8px }
+.nav button {
+    margin-right: 8px;
+    padding: 20px 60px; /* Adjust padding to change size */
+    font-size: 2rem;    /* Adjust font size */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
 main{ padding:16px }
 table{ width:100%; border-collapse:collapse }
 th,td{ padding:8px; border:1px solid #ddd }
@@ -20,7 +25,7 @@ th,td{ padding:8px; border:1px solid #ddd }
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000; 
 }
 
 .modal-content {
@@ -62,6 +67,17 @@ th,td{ padding:8px; border:1px solid #ddd }
     justify-content: flex-end;
     gap: 1rem;
     margin-top: 1.5rem;
+}
+
+/* Add this new rule for the modal buttons */
+.modal-actions button {
+    padding: 20px 30px; /* Increase padding to make buttons bigger */
+    font-size: 1rem;    /* Increase font size for button text */
+    border: 1px solid var(--muted);
+    background-color: var(--bg);
+    color: var(--fg);
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .sale-record {

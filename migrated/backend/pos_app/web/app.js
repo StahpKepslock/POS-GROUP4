@@ -131,21 +131,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    productsTableBody.addEventListener('click', async (e) => {
+    function showInfoModal(message, onOk) {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal-content';
+        
+        modal.innerHTML = `
+            <p>${message}</p>
+            <div class="modal-actions">
+                <button id="ok-action">OK</button>
+            </div>
+        `;
+        
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+    
+        document.getElementById('ok-action').addEventListener('click', () => {
+            playSound('click');
+            if (onOk) onOk();
+            document.body.removeChild(overlay);
+        });
+    }
+
+    function showConfirmModal(message, onConfirm) {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal-content';
+        
+        modal.innerHTML = `
+            <p>${message}</p>
+            <div class="modal-actions">
+                <button id="confirm-action">Confirm</button>
+                <button id="cancel-action">Cancel</button>
+            </div>
+        `;
+        
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+    
+        document.getElementById('confirm-action').addEventListener('click', () => {
+            playSound('click');
+            onConfirm();
+            document.body.removeChild(overlay);
+        });
+    
+        document.getElementById('cancel-action').addEventListener('click', () => {
+            playSound('click');
+            document.body.removeChild(overlay);
+        });
+    }
+    
+    productsTableBody.addEventListener('click', (e) => {
         const target = e.target;
         const id = target.dataset.id;
-        playSound('click');
     
         if (target.classList.contains('edit')) {
+            playSound('click');
             const product = productsCache.find(p => p.id == id);
             if (product) {
                 showEditModal(product);
             }
         } else if (target.classList.contains('del')) {
-            if (confirm('Are you sure you want to delete this product?')) {
+            playSound('click');
+            showConfirmModal('Are you sure you want to delete this product?', async () => {
                 await api.deleteProduct(id);
                 await loadProducts();
-            }
+                productForm.reset();
+            });
         }
     });
 
@@ -275,11 +331,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const sale = await api.createSale(cart);
         if (sale && sale.success) {
             playSound('sale');
-            alert('Sale completed successfully!');
-            cart = [];
-            renderCart();
-            await loadProducts(); // Reload products to update stock
-            show('manage');
+            showInfoModal('Sale completed successfully!', () => {
+                cart = [];
+                renderCart();
+                show('manage');
+            });
         } else {
             alert('Failed to complete sale. ' + (sale.message || ''));
         }
